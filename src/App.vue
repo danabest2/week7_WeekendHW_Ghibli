@@ -1,28 +1,42 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template lang="html">
+  <div >
+    <location-select :locations="locations" />
+    <location-info :location="selectedLocation" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { eventBus} from '@/main.js';
+import LocationSelect from '@/components/LocationSelect.vue';
+import LocationInfo from '@/components/LocationInfo';
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    'location-select': LocationSelect,
+    'location-info': LocationInfo,
+    // 'people-info': PeopleInfo
+  },
+  data() {
+    return {
+      locations: [],
+      selectedLocation: null,
+      // people: []
+    };
+  },
+  mounted() {
+    eventBus.$on('location-selected', (selectedIndex) => {
+      this.selectedLocation = this.locations[selectedIndex];
+    });
+    fetch('https://ghibliapi.herokuapp.com/locations')
+    .then(res => res.json())
+    .then(locations => this.locations = locations);
+
+    // fetch('https://ghibliapi.herokuapp.com/people')
+    // .then(res => res.json())
+    // .then(people => this.people = people);
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="css" scoped>
 </style>
