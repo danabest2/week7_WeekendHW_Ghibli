@@ -4,8 +4,8 @@
     <li><span class="bold">Climate:</span>{{
       location.climate }}</li>
     <li><span class="bold">Terrain:</span>{{ location.terrain }}</li>
-    <li><span class="bold">Surface Water:</span>{{ location.surface_water.toLocaleString() }}</li>
-    <li><span class="bold">Residents:</span>{{ location.residents.people }}</li>
+    <li><span class="bold">Surface Water:</span>{{ location.surface_water }}</li>
+    <li><span class="bold">Residents:</span>{{ location.residents }}</li>
 
   </ul>
 
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'location-info',
+  name: 'LocationInfo',
   props: ['location'],
   // props: [ 'people' ]
 }

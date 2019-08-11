@@ -1,10 +1,18 @@
-<template lang="html">
+<template>
+  <div>
+
 <select @change="locationSelected">
   <option selected disabled>-</option>
   <option v-for="(location, index) in locations"
   :value="index">{{ location.name }}</option>
-
 </select>
+
+
+
+<p>{{chartData}}</p>
+
+
+  </div>
 
 </template>
 
@@ -12,8 +20,8 @@
 import { eventBus } from '@/main.js';
 
 export default {
-  name: 'location-select',
-  props: ['locations'],
+  name: 'LocationSelect',
+  props: ['locations', 'chartData'],
   methods: {
     locationSelected(e) {
       const selectedIndex = e.target.value;
